@@ -1,0 +1,25 @@
+{
+  "name": "jwt-mysql-api",
+  "version": "1.0.0",
+  "description": "nodejs mysql api witt jwt ",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "keywords": [
+    "nodejs",
+    "mysql",
+    "api",
+    "jwt",
+    "thk"
+  ],
+  "author": "Christian Mejia",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
