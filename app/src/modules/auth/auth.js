@@ -11,7 +11,6 @@ router.post('/login', (req, res) => {
         username: "thk",
         email: "tenhitokiri@gmail.com"
     }
-    console.log(secret_key)
     jwt.sign({
         user
     }, secret_key, (err, token) => {
@@ -22,8 +21,10 @@ router.post('/login', (req, res) => {
 })
 
 router.post('/register', (req, res) => {
+
     res.json({
         message: "area de registro"
     })
 })
+
 module.exports = router;

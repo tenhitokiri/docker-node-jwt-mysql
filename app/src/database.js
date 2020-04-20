@@ -8,8 +8,7 @@ const {
 } = require('./keys');
 
 const pool = mysql.createPool(database);
-console.log('informacion de la base de datos:')
-console.log(database)
+console.log(`informacion de la base de datos: ${database}`)
 
 pool.getConnection((err, connection) => {
     if (err) {
