@@ -20,6 +20,20 @@ router.post('/login', (req, res) => {
     })
 })
 
+router.post('/verify', (req, res) => {
+    const token = req.header('auth-token');
+     try {
+        const verified = jwt.verify(token, process.env.SECRET_KEY)
+        req.user = verified;
+        next();
+    } catch (err) {
+        const error = `Token invalido: ${process.env.SECRET_KEY}`;
+        res.status(400).json({
+            err: error
+        })
+    }
+})
+
 router.post('/register', (req, res) => {
 
     res.json({
