@@ -1,0 +1,8 @@
+stages:
+    - say_hello
+
+say_hello:
+    stage: say_hello
+    image: alpine:latest
+    script:
+        - echo "Hello World"
