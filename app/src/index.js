@@ -67,7 +67,7 @@ app.use('/api/auth', rutaAuth);
 app.use('/server', async (req, res) => {
 	let salida = '';
 	const roles = await axios
-		.get('http://10.10.0.2/api/roles')
+		.get('http://127.0.0.1/api/roles')
 		//.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
 		.then((response) => {
 			//console.log(response.data.url);
@@ -85,8 +85,8 @@ app.use('/server', async (req, res) => {
 //así no sirve
 app.get('/server2', async (req, res) => {
 	let salida = '';
-	//const roles = await fetch('http://10.10.0.2/api/roles');
-	const roles = await fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
+	const roles = await fetch('http://127.0.0.1/api/roles')
+		//const roles = await fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
 		.then((response) => {
 			console.log(response);
 			salida = response;
