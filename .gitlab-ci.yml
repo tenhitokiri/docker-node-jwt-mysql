@@ -1,8 +1,21 @@
-stages:
-    - say_hello
+image: node:12
 
-say_hello:
-    stage: say_hello
-    image: alpine:latest
-    script:
-        - echo "Hello World"
+    stages:
+      - build
+      - deploy
+
+    cache:
+      paths:
+        - node_modules/
+
+    install_dependencies:
+      stage: build
+      script:
+        - npm install
+      artifacts:
+        paths:
+          - node_modules/
+
+    deploy_app:
+      stage: deploy
+      script: npm start
