@@ -1,21 +1,21 @@
 image: node:12
 
-    stages:
-      - build
-      - deploy
+stages:
+    - build
+    - deploy
 
-    cache:
-      paths:
+cache:
+    paths:
         - node_modules/
 
-    install_dependencies:
-      stage: build
-      script:
+install_dependencies:
+    stage: build
+    script:
         - npm install
-      artifacts:
+    artifacts:
         paths:
-          - node_modules/
+            - node_modules/
 
-    deploy_app:
-      stage: deploy
-      script: npm start
+deploy_app:
+    stage: deploy
+    script: npm start
