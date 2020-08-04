@@ -3,7 +3,10 @@ version: '3.1'
 services:
 
     node-api-jwt:
-        image: node:12
+        build: 
+            context: .
+            args: 
+                - config=transven
         container_name: node_api_jwt
         restart: always
         ports:  
@@ -20,7 +23,7 @@ services:
             # si se necesita trabajar con la base de datos local solo cambiar el valor de la variable DEPLOYMENT, no borrarla
             - DEPLOYMENT=dev
             - PORT=8002
-            - SECRET_KEY=sdfsadfsdfsdf
+            - SECRET_KEY=holas
         
         working_dir: /app
         command: bash -c "npm install && npm start"
