@@ -1,6 +1,5 @@
-image:
-    node:12
-    
+image: node:12
+
 stages:
     - build
     - containerization
@@ -28,6 +27,7 @@ containerization:
         # Cleanup by removing the local image
         #- docker image rm my-registry/my-application
 
-#deploy_app:
-#    stage: deploy
-#    script: npm start
+deploy_app:
+    stage: deploy
+    script: 
+        - docker-compose up -d 

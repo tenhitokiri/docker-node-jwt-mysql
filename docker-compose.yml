@@ -3,10 +3,11 @@ version: '3.1'
 services:
 
     node-api-jwt:
-        build: 
-            context: .
-            args: 
-                - config=transven
+        image: thk/docker-test:latest
+        #build: 
+        #    context: .
+        #    args: 
+        #        - config=transven
         container_name: node_api_jwt
         restart: always
         ports:  
