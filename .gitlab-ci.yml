@@ -30,4 +30,5 @@ containerization:
 deploy_app:
     stage: deploy
     script: 
+        - docker-compose down 
         - docker-compose up -d 
