@@ -1,4 +1,4 @@
-version: '3.1'
+version: '2'
 
 services:
 
@@ -13,8 +13,8 @@ services:
         ports:  
             #El puerto expuesto en el caso de node debe ser el mismo por el que corre la app 
             - "8002:8002"
-        volumes: 
-            - ./app:/app
+        #volumes: 
+            #- ./app:/app
         environment:
             - MYSQL_SERVER=45.181.250.100
             - MYSQL_PORT=3306
@@ -24,7 +24,7 @@ services:
             # si se necesita trabajar con la base de datos local solo cambiar el valor de la variable DEPLOYMENT, no borrarla
             - DEPLOYMENT=dev
             - PORT=8002
-            - SECRET_KEY=holas
+            - SECRET_KEY=hola_tu
         
         working_dir: /app
         command: bash -c "npm install && npm start"
