@@ -24,7 +24,7 @@ services:
             # si se necesita trabajar con la base de datos local solo cambiar el valor de la variable DEPLOYMENT, no borrarla
             - DEPLOYMENT=dev
             - PORT=8002
-            - SECRET_KEY=hola_tu
+            - SECRET_KEY=hola_yo
         
         working_dir: /app
         command: bash -c "npm install && npm start"
