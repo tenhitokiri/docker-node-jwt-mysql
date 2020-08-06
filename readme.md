@@ -1,23 +1,27 @@
 # Proyecto de Prueba de CI/CD, Docker, Gitlab Runner
 
-##Descrición
+## Descrición
 Rest API de pruebas de Integración y despliegue continuo en contenedor Docker usando Nodejs, jwt.
 
-##Creado por:
+## Creado por:
 Chrsitian Mejia
 
-##Fecha:
+## Fecha:
 06 Agosto 2020
 
-##Tecnologías usadas:
+## Tecnologías usadas:
 * Nodejs
 * Express
 * jwt
 * docker
 * gitlab ci
 
-###Enpoints
+### Enpoints
 * /
 * /api
 * /server
 * /server2
+* /api/users [GET] (jwt)
+* /api/auth/login [POST] (jwt) 
+* /api/auth/verify [POST] (jwt) 
+* /api/auth/register [POST] (jwt) 
