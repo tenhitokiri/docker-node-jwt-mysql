@@ -3,34 +3,22 @@ version: "2"
 services:
 
     node-api-jwt:
-        image: thk/docker-test:latest
-        #build: 
-        #    context: .
-        #    args: 
-        #        - config=transven
-        container_name: node_api_jwt
+        image: $BUILD_TAG:latest
+        container_name: $CONT_NAME
         restart: always
         ports:  
             #El puerto expuesto en el caso de node debe ser el mismo por el que corre la app 
-            - "8002:8002"
-        #volumes: 
-            #- ./app:/app
+            - "$PORT:$PORT"
         environment:
-            - MYSQL_SERVER=45.181.250.100
-            - MYSQL_PORT=3306
-            - MYSQL_DB=conta_2050_2020
-            - MYSQL_USER=root
-            - MYSQL_PW=.4C3r04dm1n
+            - MYSQL_SERVER=$MYSQL_SERVER
+            - MYSQL_PORT=$MYSQL_PORT
+            - MYSQL_DB=$MYSQL_DB
+            - MYSQL_USER=$MYSQL_USER
+            - MYSQL_PW=$MYSQL_PW
             # si se necesita trabajar con la base de datos local solo cambiar el valor de la variable DEPLOYMENT, no borrarla
-            - DEPLOYMENT=dev
-            - PORT=8002
-            - SECRET_KEY=hola_yo
-        
-        working_dir: /app
-        command: bash -c "npm install && npm start"
+            - PORT=$PORT
+            - SECRET_KEY=$SECRET_KEY
         networks:
             - webnet            
-
-
 networks:
     webnet: 

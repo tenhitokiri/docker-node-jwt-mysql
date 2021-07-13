@@ -8,17 +8,7 @@ WORKDIR /app
 COPY ./app/ /app/
 
 #Install dependencies in container
-RUN npm install
-
-#Default arguments
-ARG MYSQL_PORT=3306
-ARG MYSQL_DB=conta_2050_2020
-ARG MYSQL_SERVER=45.181.250.100
-ARG MYSQL_USER=root
-ARG MYSQL_PW=.4C3r04dm1n
-ARG DEPLOYMENT=dev
-ARG PORT=8002
-ARG SECRET_KEY=sdfsadfsdfsdf
+RUN yarn
 
 #Enviroment variables
 ENV MYSQL_SERVER=$MYSQL_SERVER

@@ -4,42 +4,59 @@ stages:
     - build
     - containerization
     - deploy
-    
-cache:
-    paths:
-        - node_modules/
 
-install_dependencies:
+build_image:
     stage: build
     script:
-        - npm install
-    artifacts:
-        paths:
-            - node_modules/
+        - docker build -t $BUILD_TAG .
 
-containerization:
-    stage: containerization # must match the stage name declared above
+#register the image only on Master Branch
+register_image:
+    stage: containerization
+    variables:
+        SHA: $CI_COMMIT_SHORT_SHA
+        REGISTER_TAG: ${CI_PROJECT_NAME}_${CI_COMMIT_BRANCH}
+        CONFIG: $CONFIG_PROD
     script:
-        # Build the container image
-        - docker build -t thk/docker-test .
-        # Push the container image to the registry
-        #- docker push my-registry/my-application
-        # Cleanup by removing the local image
-        #- docker image rm my-registry/my-application
-
-deploy_to_qas:
-    stage: deploy
-    script: 
-        - docker-compose down 
-        - docker-compose up -d 
+        - docker tag $BUILD_TAG $DOCKER_SERVER/$REGISTER_TAG:$SHA
+        - docker tag $BUILD_TAG $DOCKER_SERVER/$REGISTER_TAG:latest
+        - docker push $DOCKER_SERVER/$REGISTER_TAG:$SHA
+        - docker push $DOCKER_SERVER/$REGISTER_TAG:latest
     only:
-        - qas
+        - master
+
+deploy_to_dev:
+    stage: deploy
+    variables:
+        RUN_TAG: $BUILD_TAG
+        CONT_NAME: $BUILD_TAG
+    script:
+        - docker-compose down
+        - docker-compose up -d
+    only:
+        - desarrollo
+    tags:
+        - desarrollo
 
 deploy_to_prod:
     stage: deploy
-    script: 
-        - docker-compose down 
-        - docker-compose up -d 
+    variables:
+        RUN_TAG: ${DOCKER_SERVER}/${BUILD_TAG}:latest
+        CONT_NAME: $BUILD_TAG
+        PORT: $PORT
+        MYSQL_SERVER: $MYSQL_SERVER
+        MYSQL_PORT: $MYSQL_PORT
+        MYSQL_DB: $MYSQL_DB
+        MYSQL_USER: $MYSQL_USER
+        MYSQL_PW: $MYSQL_PW
+        DEPLOYMENT: $DEPLOYMENT
+        SECRET_KEY: $SECRET_KEY
+    script:
+        - docker pull $RUN_TAG
+        - docker-compose down
+        - docker-compose up -d
     only:
         - master
     when: manual
+    tags:
+        - master

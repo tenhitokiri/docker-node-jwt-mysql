@@ -40,3 +40,7 @@ Chrsitian Mejia
 - MYSQL_PW
 - MYSQL_DB
 - MYSQL_PORT
+
+### Gitlab Envs
+
+- BUILD_TAG
